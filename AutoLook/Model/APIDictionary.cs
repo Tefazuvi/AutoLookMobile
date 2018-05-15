@@ -4,7 +4,7 @@ namespace AutoLook.Model
     public abstract class APIDictionary
     {
 
-        public const string Base = "http://c45f02c2.ngrok.io/";
+        public const string Base = "http://e094c32a.ngrok.io/";
 
 
         #region BaseCore APIs
