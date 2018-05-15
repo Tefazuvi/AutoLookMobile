@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" x:Name="ReceiveCar" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AutoLook.View.ReceiveCar" Title="Recibimos">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="stkContainer" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout BackgroundColor="#000066" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label Text="RECIBIMOS SU CARRO" FontAttributes="Bold" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" Margin="0,20,0,10" />
+                </StackLayout>
+                <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="30,10">
+                        <Entry Text="{Binding ReceivedActual.Brand}" Placeholder="Marca" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                        <Entry Text="{Binding ReceivedActual.Year}" Placeholder="Año" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                        <Entry Text="{Binding ReceivedActual.Model}" Placeholder="Modelo" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                        <Entry Text="{Binding ReceivedActual.Miles}" Placeholder="Millas" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                        <Entry Text="{Binding ReceivedActual.Damage}" Placeholder="Daños" TextColor="Gray" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                        <StackLayout VerticalOptions="StartAndExpand">
+                            <ListView x:Name="lstvImages" ItemsSource="{Binding ReceivedActual.lstImagenes}" HasUnevenRows="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Image Source="{Binding Path}" />
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                        <StackLayout Padding="60,10" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                            <Image x:Name="imgAdd" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="addImage.png" HeightRequest="35" WidthRequest="35">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path = BindingContext.AddImageCommand, Source={x:Reference ReceiveCar}}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Button Text="Enviar Consulta" Command="{Binding ReceiveCarCommand}" VerticalOptions="Start" BackgroundColor="#9b9b9b" TextColor="White" FontAttributes="Bold" HeightRequest="30"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

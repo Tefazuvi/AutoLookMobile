@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions" xmlns:local="clr-namespace:AutoLook.View" x:Name="CarDetails" x:Class="AutoLook.View.CarDetails">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="cnvImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="stkContainer" BackgroundColor="White" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout BackgroundColor="#000066" HorizontalOptions="FillAndExpand">
+                    <Label Text="DETALLES DEL CARRO" FontAttributes="Bold" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" Margin="0,20,0,10" />
+                </StackLayout>
+                <!--Carousel View-->
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="38*" />
+                            <RowDefinition Height="7*" />
+                            <RowDefinition Height="55*" />
+                        </Grid.RowDefinitions>
+                        <cv:CarouselViewControl Grid.RowSpan="2" ItemsSource="{Binding VehiculoActual.lstImagenes}" Position="{Binding ImagenActual}" HeightRequest="250">
+                            <cv:CarouselViewControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image Aspect="AspectFill" Source="{Binding Image, Converter={StaticResource cnvImageConverter}}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </cv:CarouselViewControl.ItemTemplate>
+                        </cv:CarouselViewControl>
+                        <StackLayout Grid.Row="1" WidthRequest="50" HorizontalOptions="EndAndExpand" BackgroundColor="#FFF" Orientation="Horizontal">
+                            <Label Text="{Binding Posicion}" TextColor="Black" FontSize="18" HorizontalOptions="Center" Margin="10,0,0,0" VerticalOptions="CenterAndExpand" />
+                            <Label Text="{Binding VehiculoActual.lstImagenes.Count, StringFormat='/{0}'}" TextColor="Black" FontSize="18" Margin="-5,0,0,0" VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" WidthRequest="50" HorizontalOptions="StartAndExpand" Orientation="Horizontal" IsVisible="{Binding IsLogged}">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddFavoriteCommand}" CommandParameter="{Binding VehiculoActual.Id}" />
+                            </StackLayout.GestureRecognizers>
+                            <Image x:Name="imgAdd" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Source="heart.png" HeightRequest="25" WidthRequest="25" />
+                        </StackLayout>
+                        <ScrollView Grid.Row="2" BackgroundColor="#F4F4F4" Padding="12">
+                            <StackLayout BackgroundColor="White" HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label Text="{Binding VehiculoActual.Brand}" TextColor="#000066" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                            <Label Text="{Binding VehiculoActual.Model}" TextColor="#000066" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                <Label Text="{Binding VehiculoActual.Miles}" TextColor="#000066" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="30" />
+                                                <Label Text="Km" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="30" />
+                                            </StackLayout>
+                                            <Label Text="{Binding VehiculoActual.Colour}" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                            <Label Text="{Binding VehiculoActual.Year}" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label Text="{Binding VehiculoActual.Type}" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                <Label Text="{Binding VehiculoActual.DoorsQuantity}" TextColor="#000066" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HeightRequest="30" />
+                                                <Label Text="Puertas" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="30" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                                                <Label Text="{Binding VehiculoActual.Capacity}" TextColor="#000066" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                                <Image HorizontalOptions="Start" Source="people.png" HeightRequest="25" />
+                                            </StackLayout>
+                                            <Label Text="{Binding VehiculoActual.Motor}" TextColor="#000066" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HeightRequest="30" />
+                                            <Label Text="{Binding VehiculoActual.Gas}" TextColor="#000066" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HeightRequest="30" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label Text="₡" TextColor="#000066" FontAttributes="Bold" HorizontalOptions="Center" HeightRequest="30" />
+                                        <Label Text="{Binding VehiculoActual.Price}" FontAttributes="Bold" TextColor="#000066" HorizontalOptions="Center" HeightRequest="30" />
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label Text="EXTRAS" TextColor="Gray" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" HeightRequest="30" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Vidrios eléctricos" HorizontalOptions="StartAndExpand" WidthRequest="220" VerticalOptions="Center" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.ElectricWindows}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Cierre central" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.CentralLock}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Dirección hidráulica" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.HydraulicSteering}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Retrovisores eléctricos" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.ElectricRearView}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Alarma" HorizontalOptions="Start" VerticalOptions="StartAndExpand" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.Alarm}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                                            <Label Text="Aire acondicionado" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.AirConditioner}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="20,0,0,10">
+                                            <Label Text="Aros de Lujo" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="220" TextColor="Gray" />
+                                            <Switch IsToggled="{Binding VehiculoActual.LuxuryHoops}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

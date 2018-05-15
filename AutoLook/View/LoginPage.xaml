@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AutoLook.View.LoginPage">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout x:Name="stkContainer" BackgroundColor="White" HorizontalOptions="Center" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" AbsoluteLayout.LayoutFlags="All">
+                <!--Login Panel-->
+                <StackLayout Padding="30" WidthRequest="250" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Scale="1.2" Margin="0,10,0,0">
+                    <!--Logo Image-->
+                    <StackLayout Margin="0,20,0,0">
+                        <Image Source="AutoLookLogo.png"/>
+                    </StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}" Color="Red" VerticalOptions="Center" HeightRequest="40" HorizontalOptions="Center"/>
+                    <Label Text="Usuario" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="Center" />
+                    <Entry Text="{Binding User}" Placeholder="Ingresar Usuario" TextColor="#9b9b9b" HorizontalTextAlignment="Center" />
+                    <Label Text="Contraseña" FontAttributes="Bold" TextColor="Gray" HorizontalOptions="Center" />
+                    <Entry Text="{Binding Password}" Placeholder="Ingresar Contraseña" TextColor="#9b9b9b" IsPassword="true" HorizontalTextAlignment="Center" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10">
+                        <Label Text="Recordar" TextColor="#9b9b9b" VerticalTextAlignment="Center"/>
+                        <Switch IsToggled="{Binding Recordar}" Scale="0.8" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <!--<Button Text="¿Olvidó su Contraseña?" Command="{Binding OpenSendPasswordCommand}" TextColor="Blue" HorizontalOptions="Center" HeightRequest="25" />-->
+                    <StackLayout Padding="80,10">
+                        <Button Text="Login" Command="{Binding LoginCommand}" BackgroundColor="#000066" TextColor="White" FontAttributes="Bold" HeightRequest="30" />
+                    </StackLayout>
+                    <Button Text="Crear Cuenta" Command="{Binding OpenCreateUserCommand}" TextColor="Blue" HorizontalOptions="Center" HeightRequest="25" />
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
